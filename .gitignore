@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-
+*.pyc
 # package #
 
 *.7z
@@ -14,5 +14,3 @@ __pycache__/
 
 
 
-
-*.pyc
