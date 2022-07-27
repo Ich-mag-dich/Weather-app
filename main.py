@@ -6,8 +6,7 @@ from fastapi import FastAPI, Form
 app = FastAPI()
 
 # 메인페이지 접속시 "/" 로 가능
-# 정확히는 나중에 알아보기 -> 경로인가봄 ?
-# 아래 세 줄이 템플릿 느낌
+# 정확히는 나중에 알아보기 -> 경로인가봄 ? -> 맞네
 
 
 @app.get("/")
