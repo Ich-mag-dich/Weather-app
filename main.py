@@ -1,7 +1,7 @@
 # uvicorn main:app --reload --host=0.0.0.0 --port=8000
 
 from datetime import datetime
-
+import sys
 from pip import main
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, HTMLResponse
@@ -10,6 +10,9 @@ import os
 import requests
 import json
 from fastapi.templating import Jinja2Templates
+
+print(10**4)
+sys.setrecursionlimit(10**4)
 
 app = FastAPI()
 
@@ -63,13 +66,18 @@ def getWeather(loc="Buyeo"):
 #     return getWeather(latlonJson[0]["lat"], latlonJson[0]["lon"])
 
 
-@app.get("/test")
-def testPage():
-    return json.loads(getWeather())
-
-
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+# class datesWeather(self, todayData: json, data: json, request: any):
+#     def __init__(self):
+def get5daysWeather(loc="Buyeo"):
+    url1 = f"https://api.openweathermap.org/data/2.5/forecast?q={loc}&appid={getKey()}&units=metric"
+    req = requests.get(url=url1, headers=header)
+    # print(len(req.json()["list"]))
+    # print(req.json()["list"][0])
+    return req.text
 
 
 def returnFunc(data: json, request: any, id="Buyeo"):
@@ -88,7 +96,44 @@ def returnFunc(data: json, request: any, id="Buyeo"):
         "sunrise": datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H시 %M분"),
         "sunset": datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H시 %M분")
     }
+
+    daysForecast = json.loads(get5daysWeather(id))
+
+    # print(daysForecast["list"][0]["weather"][0]["icon"])
+    dts = []
+    feels = []
+    icons = []
+    temps = []
+    hums = []
+    for i in range(0, 41):
+        try:
+            dts.append(datetime.fromtimestamp(
+                daysForecast["list"][i]["dt"]).strftime("%m.%d %H시"))
+            icons.append(daysForecast["list"][i]["weather"][0]["icon"])
+            hums.append(daysForecast["list"][i]["main"]["humidity"])
+            temps.append(daysForecast["list"][i]["main"]["temp"])
+            feels.append(daysForecast["list"][i]["main"]["feels_like"])
+        except:
+            print("error")
+            continue
+    datas["dt"] = dts
+    datas["feels"] = feels
+    datas["icons"] = icons
+    datas["temps"] = temps
+    datas["hums"] = hums
+    # print(datas.get("dt"))
+    # print(i, len(datas))
     return datas
+
+
+@app.get("/test", response_class=HTMLResponse)
+async def testPage(request: Request):
+    data = json.loads(getWeather())
+    return f"""
+        <h1> 
+            {returnFunc(data,request)}
+        </h1>
+    """
 
 
 @app.get("/weather", response_class=HTMLResponse)

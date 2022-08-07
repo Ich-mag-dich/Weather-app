@@ -1,16 +1,27 @@
 body {
-    background-color: #2C3333;
+    background-color: #B2C8DF;
 }
 
 
 /*  */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #D4ECDD;
+}
 .view {
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
-    background-color: #395B64;
-    border-radius: 10px;
+    background-color: #feffee;
+    border-radius: 20px;
 }
 
 .dsBlock {
@@ -26,7 +37,7 @@ body {
     margin-right: 40px;
     font-family: sans-serif;
     font-size: 300%;
-    color: #A5C9CA;
+    color: #6E85B7;
 }
 .city {
     font-size: 600%;
@@ -35,7 +46,7 @@ body {
     margin-left: 40px;
     padding-top: 30px;
     font-family: sans-serif;
-    color: #E7F6F2;
+    color: #6E85B7;
 }
 
 .nowTemp {
@@ -46,12 +57,12 @@ body {
     margin-left: 40px;
     /* font-weight: bold; */
     font-family: sans-serif;
-    color: #E7F6F2;
+    color: #6E85B7;
     
 }
 
 .iconImg {
-    width: 200px;
+    width: 100px;
 }
 .weatherIcon {
     margin-top: -5px;
@@ -66,12 +77,20 @@ body {
     margin-right: auto;
     width: 90%;
     margin-top: 20px;
-    background-color: #E7F6F2;
-    border-radius: 10px;
+    background-color: #feffee;
+    border-radius: 20px;
+    font-family: sans-serif;
+    
 }
 
 .forecastName {
-    margin-left: 20px;
+    font-size: 300%;
+    /* font-weight: bold; */
+    margin-bottom: 0px;
+    margin-left: 40px;
+    padding-top: 30px;
+    font-family: sans-serif;
+    color: #6E85B7;
 }
 
 
@@ -79,13 +98,20 @@ body {
     margin-bottom: 20px;
 }
 
+.centerText {
+    text-align: center;
+    color: #6E85B7;
+    font-size: 300%;
+}
+
+
 /* 화면 넓을때 */
 @media (hover: hover) and (pointer: fine) {
     .view {
         width: 50%;
         margin-left: auto;
         margin-right: auto;
-        border-radius: 10px;
+        border-radius: 20px;
         font-size: 100%;
     }
     .nowTemp {
@@ -117,16 +143,26 @@ body {
     
     .forecast {
         width: 50%;
-        border-radius: 10px;
+        border-radius: 20px;
         margin-top: 20px;
         margin-left: auto;
         margin-right: auto;
+        font-family: sans-serif;
     }
     .forecastName {
+        font-size: 200%;
+    /* font-weight: bold; */
+        margin-bottom: 0px;
         margin-left: 50px;
+        padding-top: 30px;
+        font-family: sans-serif;
     }
     .marginBottom {
         margin-bottom: 0px;
+    }
+    .centerText {
+        text-align: center;
+        font-size: 150%;
     }
     
   }

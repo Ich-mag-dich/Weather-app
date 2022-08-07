@@ -3,15 +3,16 @@
     <title>Weather</title>
     <link href="{{ url_for('static', path='weather.css') }}" rel="stylesheet" />
   </head>
-  <body>
+  <body onload="loadTable()">
     <div class="view">
       <p class="city">{{ id }}</p>
       <p
         style="
           float: right;
           margin-right: 50px;
-          color: #a5c9ca;
+          color: #6e85b7;
           font-size: 100%;
+          font-weight: bold;
         "
       >
         {{nowTime}} 기준
@@ -55,8 +56,39 @@
       </div>
     </div>
     <div class="forecast">
-      <div class="forecastName">weather forecast</div>
-      <div class="forcastView"></div>
+      <div class="forecastName"></div>
+      <div class="forcastView">
+        <table style="width: 100%">
+          <tr>
+            <th class="centerText">시각</th>
+            <th class="centerText">날씨</th>
+            <th class="centerText">습도</th>
+            <th class="centerText">기온</th>
+            <th class="centerText">체감</th>
+          </tr>
+          {% for i in range(0,39) %}
+          <tr>
+            <td class="centerText">{{ dt[i] }}</td>
+            <td class="centerText forecastIcon">
+              <img
+                class="iconImg"
+                src="http://openweathermap.org/img/wn/{{icons[i]}}.png"
+              />
+            </td>
+            <td class="centerText">{{ hums[i] }}%</td>
+            <td class="centerText">{{ temps[i] }}°</td>
+            <td class="centerText">{{ feels[i] }}°</td>
+          </tr>
+          {%endfor%}
+        </table>
+      </div>
     </div>
   </body>
 </html>
+
+<!-- document.querySelector("body > div.forecast > div.forcastView > table > tbody") -->
+
+<!-- 
+document.querySelector("body > div.forecast > div.forcastView > table > tbody > tr:nth-child(2) > td:nth-child(40)")
+
+ -->
