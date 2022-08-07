@@ -35,6 +35,13 @@ header = {
 async def indexJoin():
     return FileResponse("./html/index.html")
 
+favicon_path = './favicon.ico'
+
+
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse(favicon_path)
+
 
 @app.post("/send")
 async def sendData(username: str = Form(), password: str = Form()):
