@@ -2,6 +2,8 @@
 __pycache__/
 log_etc/
 *.pyc
+key/
+key.txt
 # package #
 
 *.7z
@@ -12,6 +14,3 @@ log_etc/
 *.rar
 *.tar
 *.zip
-
-
-

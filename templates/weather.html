@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Weather</title>
+    <link href="{{ url_for('static', path='weather.css') }}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="view">
+      <p class="city">{{ id }}</p>
+      <p
+        style="
+          float: right;
+          margin-right: 50px;
+          color: #a5c9ca;
+          font-size: 100%;
+        "
+      >
+        {{nowTime}} 기준
+      </p>
+      <div class="marginBottom" style="display: flex">
+        <div>
+          <span class="nowTemp">{{ nowTemp }}°</span>
+        </div>
+
+        <div class="weatherIcon" style="display: flex">
+          <img
+            class="iconImg"
+            src="http://openweathermap.org/img/wn/{{weatherIcon}}@2x.png"
+          />
+        </div>
+      </div>
+
+      <div class="bold">
+        <div class="dsBlock">체감온도</div>
+        <div class="dsBlockR">{{ feels_like }}°</div>
+      </div>
+      <div class="bold">
+        <div class="dsBlock">최고/최저</div>
+        <div class="dsBlockR">{{temp_max}}° / {{temp_min}}°</div>
+      </div>
+      <div class="bold">
+        <div class="dsBlock">기압</div>
+        <div class="dsBlockR">{{pressure}}mb</div>
+      </div>
+      <div class="bold">
+        <div class="dsBlock">풍속</div>
+        <div class="dsBlockR">{{windSpeed}}km/h</div>
+      </div>
+      <div class="bold">
+        <div class="dsBlock">습도</div>
+        <div class="dsBlockR">{{humidity}}%</div>
+      </div>
+      <div class="bold" style="padding-bottom: 20px">
+        <div class="dsBlock">일출/일몰</div>
+        <div class="dsBlockR">{{sunrise}} / {{sunset}}</div>
+      </div>
+    </div>
+    <div class="forecast">
+      <div class="forecastName">weather forecast</div>
+      <div class="forcastView"></div>
+    </div>
+  </body>
+</html>
