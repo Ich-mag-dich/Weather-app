@@ -1,11 +1,13 @@
 # uvicorn main:app --reload --host=0.0.0.0 --port=8000
 
+
+from src import readqr as rq
 from datetime import datetime
 import sys
 from pip import main
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, HTMLResponse
-from fastapi import FastAPI, Form, Request
+from fastapi import FastAPI, Form, Request, File, UploadFile
 import os
 import requests
 import json
@@ -33,6 +35,7 @@ header = {
 
 @app.get("/")
 async def indexJoin():
+    rq.helloworld()
     return FileResponse("./html/index.html")
 
 favicon_path = './favicon.ico'
@@ -43,11 +46,11 @@ async def favicon():
     return FileResponse(favicon_path)
 
 
-@app.post("/send")
-async def sendData(username: str = Form(), password: str = Form()):
+# @app.post("/send")
+# async def sendData(username: str = Form(), password: str = Form()):
 
-    print(f"{strBold}\nusername: {username}, password: {password} {strNormal}")
-    return {"username": username, "password": password}
+#     print(f"{strBold}\nusername: {username}, password: {password} {strNormal}")
+#     return {"username": username, "password": password}
 
 
 def getKey():
@@ -77,8 +80,19 @@ templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
+@app.get("/readqr", response_class=HTMLResponse)
+async def getReadQr(request: Request):
+    return templates.TemplateResponse("readqr.html", {"request": request})
+
+
+@app.post("/readqr/send", response_class=HTMLResponse)
+async def create_upload_file(file: bytes = File()):
+    return {"file_size": len(file)}
+
 # class datesWeather(self, todayData: json, data: json, request: any):
 #     def __init__(self):
+
+
 def get5daysWeather(loc="Buyeo"):
     url1 = f"https://api.openweathermap.org/data/2.5/forecast?q={loc}&appid={getKey()}&units=metric"
     req = requests.get(url=url1, headers=header)
