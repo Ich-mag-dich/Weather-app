@@ -35,7 +35,6 @@ header = {
 
 @app.get("/")
 async def indexJoin():
-    rq.helloworld()
     return FileResponse("./html/index.html")
 
 favicon_path = './favicon.ico'
@@ -135,7 +134,7 @@ def returnFunc(data: json, request: any, id="Buyeo"):
             temps.append(daysForecast["list"][i]["main"]["temp"])
             feels.append(daysForecast["list"][i]["main"]["feels_like"])
         except:
-            print("error")
+            # print("error")
             continue
     datas["dt"] = dts
     datas["feels"] = feels
